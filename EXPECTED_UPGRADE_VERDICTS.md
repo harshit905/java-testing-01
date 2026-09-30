@@ -17,3 +17,6 @@ check in v1, so verdicts rest on the japicmp diff, the grep, notes and the agent
 ## Traps built in
 - `com.example.decoy.FastDoubleParser` and `DecoyUse.parse` are local; a grep for `FastDoubleParser`/`parseDouble` hits them. Only `JsonNumbers.java` uses jackson's class (check the import).
 - Java has no execution check in v1, so a NEEDS CHANGES must come from a confirmed call site, not a failing build.
+
+## Verified locally (Oct 1 2026, Maven 3.9.9, JDK 17)
+`mvn clean compile` passes at the pinned versions. With `snakeyaml` 2.0: `YamlConfig.java:[14,54] incompatible types: Class<Settings> cannot be converted to LoaderOptions`. With `jackson-core` 2.21.4: `JsonNumbers.java:[5,50] package com.fasterxml.jackson.core.io.doubleparser does not exist`. With `log4j-core` 2.25.4, `commons-io` 2.14.0, `guava` 32.0.0-jre and `guava` 32.0.0-android: compiles clean.
