@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example</groupId>
+  <artifactId>java-testing-01</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <!-- direct, KNOWN-VULNERABLE: fix 2.15.0+ removed io.doubleparser.FastDoubleParser, which JsonNumbers uses -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.14.2</version>
+    </dependency>
+    <!-- direct, KNOWN-VULNERABLE (Log4Shell family): fixes are API-compatible for LogManager/Logger use -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.14.1</version>
+    </dependency>
+    <!-- direct, KNOWN-VULNERABLE: the advisory's first patched version is 32.0.0-android (flavour qualifier edge case) -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>30.0-jre</version>
+    </dependency>
+    <!-- direct, KNOWN-VULNERABLE: FilenameUtils.normalize fix in 2.7; IOUtils.toString(InputStream) is deprecated but present -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.6</version>
+    </dependency>
+    <!-- direct, KNOWN-VULNERABLE: fix is 2.0, where Constructor(Class) became Constructor(Class, LoaderOptions) -->
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>1.33</version>
+    </dependency>
+    <!-- direct and healthy itself; pulls KNOWN-VULNERABLE transitives: spring-web 6.0.7, tomcat-embed-core 10.1.7, jackson-databind 2.14.2 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>3.0.5</version>
+    </dependency>
+  </dependencies>
+</project>
